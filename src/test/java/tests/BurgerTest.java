@@ -64,18 +64,25 @@ public class BurgerTest {
     }
 
     @Test
-    @DisplayName("Проверка: removeIngredient() удаляет ингредиент по индексу")
-    void removeIngredientShouldWorkCorrectly() {
-
+    @DisplayName("removeIngredient() уменьшает количество ингредиентов")
+    void removeIngredientShouldDecreaseSize() {
         burger.addIngredient(filling);
         burger.addIngredient(sauce);
 
         burger.removeIngredient(0);
 
-        assertEquals(1, burger.ingredients.size(),
-                "После удаления ингредиента размер списка должен уменьшиться");
-        assertEquals(sauce, burger.ingredients.get(0),
-                "После удаления по индексу должны остаться правильные ингредиенты");
+        assertEquals(1, burger.ingredients.size());
+    }
+
+    @Test
+    @DisplayName("removeIngredient() оставляет корректный ингредиент после удаления")
+    void removeIngredientShouldKeepCorrectIngredient() {
+        burger.addIngredient(filling);
+        burger.addIngredient(sauce);
+
+        burger.removeIngredient(0);
+
+        assertEquals(sauce, burger.ingredients.get(0));
     }
 
     @Test

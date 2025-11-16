@@ -23,15 +23,29 @@ public class IngredientTest {
 
     @ParameterizedTest
     @MethodSource("ingredientData")
-    @DisplayName("Проверка: конструктор и геттеры корректно возвращают значения полей ингредиента")
-    void ingredientConstructorAndGettersShouldReturnCorrectValues(IngredientType type, String name, float price) {
+    @DisplayName("Проверка: getType() возвращает корректный тип ингредиента")
+    void ingredientGetTypeShouldReturnCorrectValue(IngredientType type, String name, float price) {
         Ingredient ingredient = new Ingredient(type, name, price);
 
         assertEquals(type, ingredient.getType(),
                 "Метод getType() должен возвращать тип, переданный в конструктор");
+    }
+
+    @ParameterizedTest
+    @MethodSource("ingredientData")
+    @DisplayName("Проверка: getName() возвращает корректное имя ингредиента")
+    void ingredientGetNameShouldReturnCorrectValue(IngredientType type, String name, float price) {
+        Ingredient ingredient = new Ingredient(type, name, price);
 
         assertEquals(name, ingredient.getName(),
                 "Метод getName() должен возвращать имя, переданное в конструктор");
+    }
+
+    @ParameterizedTest
+    @MethodSource("ingredientData")
+    @DisplayName("Проверка: getPrice() возвращает корректную цену ингредиента")
+    void ingredientGetPriceShouldReturnCorrectValue(IngredientType type, String name, float price) {
+        Ingredient ingredient = new Ingredient(type, name, price);
 
         assertEquals(price, ingredient.getPrice(),
                 "Метод getPrice() должен возвращать цену, переданную в конструктор");

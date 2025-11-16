@@ -13,22 +13,34 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class BunTest {
 
 
-    static Stream<Arguments> bunData() {
+    static Stream<Arguments> bunDataName() {
         return Stream.of(
-                Arguments.of("Краторная булка N-200i", 1255.0f),
-                Arguments.of("Флюоресцентная булка R2-D3", 988.0f)
+                Arguments.of("Краторная булка N-200i"),
+                Arguments.of("Флюоресцентная булка R2-D3")
+        );
+    }
+
+    static Stream<Arguments> bunDataPrice() {
+        return Stream.of(
+                Arguments.of(1255.0f),
+                Arguments.of(988.0f)
         );
     }
 
     @ParameterizedTest
-    @MethodSource("bunData")
-    @DisplayName("Проверка: конструктор корректно сохраняет имя и цену булочки")
-    public void constructorShouldSetNameAndPriceCorrectly(String name, float price) {
-        Bun bun = new Bun(name, price);
+    @MethodSource("bunDataName")
+    @DisplayName("Проверка: Конструктор корректно сохраняет имя булочки")
+    public void constructorShouldSetNameCorrectly(String name) {
+        Bun bun = new Bun(name, 100.0f);
+        assertEquals(name, bun.getName());
+    }
 
-        assertEquals(name, bun.getName(), "Имя булочки должно соответствовать переданному в конструктор");
-        assertEquals(price, bun.getPrice(), "Цена булочки должна соответствовать переданному в конструктор");
-
+    @ParameterizedTest
+    @MethodSource("bunDataPrice")
+    @DisplayName("Конструктор корректно сохраняет цену булочки")
+    void constructorShouldSetPriceCorrectly(float price) {
+        Bun bun = new Bun("Булка", price);
+        assertEquals(price, bun.getPrice());
     }
 
     @Test
